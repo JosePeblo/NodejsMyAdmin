@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodejsMyAdmin</title>
+</head>
+<body>
+    Databases
+    <ul>
+    </ul>
+
+    <script>
+        fetch('./db').then(res => res.json()).then(db => refreshDatabases(db));
+        const a = {db: 1, mundo: 'tres'};
+        const res = new URLSearchParams(a).toString();
+        console.log(res);
+
+        const refreshDatabases = (databases) => {
+            let list = document.querySelectorAll('ul')[0];
+            databases.forEach(elem => {
+                list.innerHTML += `<li id="${elem.Database}">${elem.Database}</li>`;
+            });
+
+            document.querySelectorAll('li').forEach(elem => {
+                elem.addEventListener('click', () => {
+                    console.log('Hola');
+                    fetch(`./db?db=${elem.innerText}`).then(res => res.json()).then(console.log)
+                });
+            });
+        };
+
+        
+    </script>
+</body>
+</html>
