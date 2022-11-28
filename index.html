@@ -10,28 +10,86 @@
     Databases
     <ul>
     </ul>
+    <nav></nav>
 
-    <script>
-        fetch('./db').then(res => res.json()).then(db => refreshDatabases(db));
-        const a = {db: 1, mundo: 'tres'};
-        const res = new URLSearchParams(a).toString();
-        console.log(res);
+    <ul>
+        <li>Database 1
+            <ul>
+                <li>table 11
+                    <ul>
+                        <li>field 111</li>
+                        <li>field 112</li>
+                        <li>field 113</li>
+                    </ul>
+                </li>
+                <li>table 12
+                    <ul>
+                        <li>field 121</li>
+                        <li>field 122</li>
+                        <li>field 123</li>
+                    </ul>
+                </li>
+                <li>table 13
+                    <ul>
+                        <li>field 131</li>
+                        <li>field 132</li>
+                        <li>field 133</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Database 2
+            <ul>
+                <li>table 21
+                    <ul>
+                        <li>field 211</li>
+                        <li>field 212</li>
+                        <li>field 213</li>
+                    </ul>
+                </li>
+                <li>table 22
+                    <ul>
+                        <li>field 221</li>
+                        <li>field 222</li>
+                        <li>field 223</li>
+                    </ul>
+                </li>
+                <li>table 23
+                    <ul>
+                        <li>field 231</li>
+                        <li>field 232</li>
+                        <li>field 233</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Database 3
+            <ul>
+                <li>table 31
+                    <ul>
+                        <li>field 311</li>
+                        <li>field 312</li>
+                        <li>field 313</li>
+                    </ul>
+                </li>
+                <li>table 32
+                    <ul>
+                        <li>field 321</li>
+                        <li>field 322</li>
+                        <li>field 323</li>
+                    </ul>
+                </li>
+                <li>table 33
+                    <ul>
+                        <li>field 331</li>
+                        <li>field 332</li>
+                        <li>field 333</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-        const refreshDatabases = (databases) => {
-            let list = document.querySelectorAll('ul')[0];
-            databases.forEach(elem => {
-                list.innerHTML += `<li id="${elem.Database}">${elem.Database}</li>`;
-            });
-
-            document.querySelectorAll('li').forEach(elem => {
-                elem.addEventListener('click', () => {
-                    console.log('Hola');
-                    fetch(`./db?db=${elem.innerText}`).then(res => res.json()).then(console.log)
-                });
-            });
-        };
-
-        
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

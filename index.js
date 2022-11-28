@@ -3,6 +3,7 @@ const { readFile } = require('fs');
 const mysql = require('mysql');
 
 const app = express();
+app.use(express.static('./'));
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -25,21 +26,29 @@ app.get('/', (req, res) => {
 
 app.get('/db', (req, res) => {
     const database = req.query.db;
+    const table = req.query.tb;
     console.log(database);
     if(!database)
     {
-        db.query('SHOW DATABASES', (err, result) => {
-            if(err) console.log(err);
-            else res.send(result);
-        });
+        sqlQuerySend('SHOW DATABASES', res)
     }
-    else 
+    else if(database && !table)
     {
-        db.query(`USE ${database}; SHOW TABLES;`, (err, result) => {
-            if(err) console.log(err);
-            else res.send(result[1]);
-        });
+        sqlQuerySend(`SHOW TABLES FROM ${database}`, res);
     }
+    else
+    {
+        sqlQuerySend(`SHOW COLUMNS FROM ${database}.${table}`, res);
+    }
+    // localhost:3000/db?db=databaseName&tb=tableName
 });
+
+const sqlQuerySend = (quer, res) => {
+    db.query(quer, (err, result) => {
+        if(err) console.log(err);
+        else res.send(result);
+    });
+};
+
 
 app.listen(process.env.PORT || 3000, () => console.log('http://localhost:3000'));
